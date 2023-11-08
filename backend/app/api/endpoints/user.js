@@ -1,6 +1,7 @@
 // post createUser
 // get getUserById
 // get allUsers
+
 // get currentUser(token) return {informations}
 // - admin
 // - doctor
