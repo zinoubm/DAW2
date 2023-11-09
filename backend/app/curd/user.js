@@ -2,6 +2,7 @@
 
 <<<<<<< HEAD
 //it's lokman
+console.log(200);
 =======
 >>>>>>> 46a9e93301c9d53e775c2cbf863b6d0a99667e80
 // createUser(userBaseInfo) -> userId
