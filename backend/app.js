@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 
 const mongoose = require("mongoose");
 const authRouter = require("./routes/authRoutes");
+const { currentUser } = require("./middlewares/authMiddleware");
 
 require("dotenv").config({ path: ".env" });
 
@@ -22,6 +23,8 @@ mongoose
   .catch((err) => {
     console.error("Error connecting to the database:", err);
   });
+
+app.use(currentUser);
 
 app.use("/api", authRouter);
 

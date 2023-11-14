@@ -1,9 +1,8 @@
 const Session = require("../models/Session");
 
-// createSession(userId) -> sessionId
 const createSession = async (userId) => {
   try {
-    const newSession = new Session();
+    const newSession = new Session(userId);
     await newSession.save();
 
     return newSession._id.toString();
@@ -13,6 +12,15 @@ const createSession = async (userId) => {
   }
 };
 
-// getUserFromSession(sessionId) -> userId
+const getUserFromSession = async (sessionId) => {
+  const session = await Session.findOne({ _id: sessionId });
+  return session._id;
+};
 
 // deleteSession(sessionId) -> sessionId
+
+module.exports = {
+  createSession,
+  getUserFromSession,
+  // deleteSession,
+};
