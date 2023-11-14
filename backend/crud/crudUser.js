@@ -1,4 +1,3 @@
-// CREATE -----------
 const { json } = require("express");
 const User = require("../models/Utilisateur");
 const Admin = require("../models/Admin");
@@ -77,140 +76,142 @@ const createPatient = async (userBaseInfo, patientInfo) => {
 const getUserByEmail = async (emailU) => {
   try {
     const user = await User.findOne({ email: emailU });
-    return user._id;
+
+    if (user) {
+      return user._id;
+    } else {
+      console.log(`User with email ${emailU} not found`);
+      return null; // or whatever value you want to return in case of no user
+    }
   } catch (error) {
     console.error("Error in getUserByEmail:", error);
   }
 };
 
-// // getUser(userId) -> object (info about user)
-// let getUser = async (uId) => {
-//   return await u.findOne({ _id: uId }).then((userInfo) => {
-//     return userInfo;
-//   });
-// };
-// // getUsers() -> [object] (array of objects containing user Info)
-// let getUsers = async () => {
-//   return await u.find().then((usersInfo) => {
-//     return usersInfo;
-//   });
-// };
-// // getAdmins() -> [object] (array of objects containing admin Info)
-// let getAdmins = async () => {
-//   return await adm.find().then((adminsInfo) => {
-//     return adminsInfo;
-//   });
-// };
-// // getDoctors() -> [object] (array of objects containing doctor Info)
-// let getDoctors = async () => {
-//   return await doc.find().then((doctorsInfo) => {
-//     return doctorsInfo;
-//   });
-// };
-// // getPatients() -> [object] (array of objects containing patient Info)
-// let getPatients = async () => {
-//   return await pat.find().then((patientsInfo) => {
-//     return patientsInfo;
-//   });
-// };
-// // isAdmin(userId) -> boolean
-// let isAdmin = async (userId) => {
-//   return getUser(userId).then((r) => {
-//     if (r.role == role.a) {
-//       check = true;
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   });
-// };
-// // isDoctor(userId) -> boolean
-// let isDoctor = async (userId) => {
-//   return getUser(userId).then((r) => {
-//     if (r.role == role.d) {
-//       check = true;
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   });
-// };
-// // isPatient(userId) -> boolean
-// let isPatien = async (userId) => {
-//   return getUser(userId).then((r) => {
-//     if (r.role == role.p) {
-//       check = true;
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   });
-// };
+let getUser = async (uId) => {
+  return await User.findOne({ _id: uId }).then((userInfo) => {
+    return userInfo;
+  });
+};
 
-// //########################### UPDATE ###########################
-// // updateUser(newUserBaseInfo) -> userId
-// let updateUser = async (uId, newUserBaseInfo) => {
-//   await u.updateOne({ _id: uId }, newUserBaseInfo);
-// };
-// // updateAdmin(newAdminInfo) -> userId
-// let updateAdmin = async (uId, adminInfo) => {
-//   await adm.updateOne({ userId: uId }, adminInfo);
-// };
-// // updateDoctor(newDoctorInfo) -> userId
-// let updateDoctor = async (uId, newDoctorInfo) => {
-//   await doc.updateOne({ userId: uId }, newDoctorInfo);
-// };
-// // updatePatient(newPatientInfo) -> userId
-// let updatePatient = async (uId, newPatientInfo) => {
-//   await pat.updateOne({ userId: uId }, newPatientInfo);
-// };
+let getUsers = async () => {
+  return await User.find().then((usersInfo) => {
+    return usersInfo;
+  });
+};
 
-// //################################ DELETE ################################
-// // deleteUser(userId) -> userId
-// let deleteUser = async (uId) => {
-//   await getUser(uId).then((r) => {
-//     switch (r.role) {
-//       case role.a:
-//         console.log("he is an admin");
-//         let deleteA = async () => {
-//           await adm.deleteOne({ userId: uId });
-//         };
-//         deleteA();
-//         break;
-//       case role.d:
-//         let deleteD = async () => {
-//           await doc.deleteOne({ userId: uId });
-//         };
-//         deleteD();
-//         break;
-//       case role.p:
-//         let deleteP = async () => {
-//           await pat.deleteOne({ userId: uId });
-//         };
-//         deleteP();
-//         break;
-//     }
-//   });
-//   await u.deleteOne({ _id: uId });
-// };
+let getAdmins = async () => {
+  return await Admin.find().then((adminsInfo) => {
+    return adminsInfo;
+  });
+};
+
+let getDoctors = async () => {
+  return await Doctor.find().then((doctorsInfo) => {
+    return doctorsInfo;
+  });
+};
+
+let getPatients = async () => {
+  return await Patient.find().then((patientsInfo) => {
+    return patientsInfo;
+  });
+};
+
+let isAdmin = async (userId) => {
+  return getUser(userId).then((r) => {
+    if (r.role == roleEnum.ADMIN) {
+      check = true;
+      return true;
+    } else {
+      return false;
+    }
+  });
+};
+
+let isDoctor = async (userId) => {
+  return getUser(userId).then((r) => {
+    if (r.role == roleEnum.DOCTOR) {
+      check = true;
+      return true;
+    } else {
+      return false;
+    }
+  });
+};
+
+let isPatien = async (userId) => {
+  return getUser(userId).then((r) => {
+    if (r.role == roleEnum.PATIENT) {
+      check = true;
+      return true;
+    } else {
+      return false;
+    }
+  });
+};
+
+let updateUser = async (uId, newUserBaseInfo) => {
+  await User.updateOne({ _id: uId }, newUserBaseInfo);
+};
+
+let updateAdmin = async (uId, adminInfo) => {
+  await Admin.updateOne({ userId: uId }, adminInfo);
+};
+
+let updateDoctor = async (uId, newDoctorInfo) => {
+  await Doctor.updateOne({ userId: uId }, newDoctorInfo);
+};
+
+let updatePatient = async (uId, newPatientInfo) => {
+  await Patient.updateOne({ userId: uId }, newPatientInfo);
+};
+
+let deleteUser = async (uId) => {
+  await getUser(uId).then((r) => {
+    switch (r.role) {
+      case roleEnum.ADMIN:
+        console.log("he is an admin");
+        let deleteA = async () => {
+          await Admin.deleteOne({ userId: uId });
+        };
+        deleteA();
+        break;
+      case roleEnum.DOCTOR:
+        let deleteD = async () => {
+          await Doctor.deleteOne({ userId: uId });
+        };
+        deleteD();
+        break;
+      case roleEnum.PATIENT:
+        let deleteP = async () => {
+          await Patient.deleteOne({ userId: uId });
+        };
+        deleteP();
+        break;
+    }
+  });
+  await User.deleteOne({ _id: uId });
+};
+
 module.exports = {
   createUser,
   getUserByEmail,
   createAdmin,
-  // updateAdmin,
+  updateAdmin,
   createDoctor,
   createPatient,
-  // getUser,
-  // getUsers,
-  // getAdmins,
-  // getDoctors,
-  // getPatients,
-  // isAdmin,
-  // isDoctor,
-  // isPatien,
-  // updateUser,
-  // updateDoctor,
-  // updatePatient,
-  // deleteUser,
-  // role,
+  getUser,
+  getUsers,
+  getAdmins,
+  getDoctors,
+  getPatients,
+  isAdmin,
+  isDoctor,
+  isPatien,
+  updateUser,
+  updateDoctor,
+  updatePatient,
+  deleteUser,
+  roleEnum,
 };
