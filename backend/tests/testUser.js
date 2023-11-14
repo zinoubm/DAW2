@@ -14,24 +14,6 @@ mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => {
     console.log("db connected");
-
-    const adminUserId = createAdmin(
-      {
-        Nom: "Boumaza",
-        Prenom: "Zine Eddine",
-        Gener: "Male",
-        dt_Naiss: new Date("2000-01-01"),
-        email: "zaine@amiaddicted.com",
-        password: "12345678",
-        is_accepte: true,
-      },
-      {
-        Role: "ADMIN",
-        Autorisation: "read-write",
-      }
-    ).then((r) => {
-      console.log("Admin created sccussfuly with userId: ", r);
-    });
   })
   .catch((err) => {
     console.error("Error connecting to the database:", err);
