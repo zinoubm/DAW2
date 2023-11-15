@@ -30,7 +30,7 @@ const getQst=async (idQst)=>{
     else
     console.log("this question is not existe"); 
     } catch (error) {
-        console.error("Error in getUserByEmail:", error);
+        console.error(error);
     }
 }
 
@@ -42,7 +42,7 @@ const getQuestionnaire= async (idQuestionnaire)=>{
         else
         console.log("this question is not existe"); 
         } catch (error) {
-            console.error("Error in getUserByEmail:", error);
+            console.error(error);
         }
 }
 
@@ -54,7 +54,7 @@ const getReponseQst=async (idRepQst)=>{
         else
         console.log("this question is not existe"); 
         } catch (error) {
-            console.error("Error in getUserByEmail:", error);
+            console.error( error);
         }
 }
 
