@@ -13,6 +13,7 @@ const createSession = async (userId) => {
 };
 
 const getUserFromSession = async (sessionId) => {
+  // session!?
   const session = await Session.findOne({ _id: sessionId });
   return session._id;
 };
