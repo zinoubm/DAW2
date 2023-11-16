@@ -73,6 +73,16 @@ const createPatient = async (userBaseInfo, patientInfo) => {
   }
 };
 
+// ########################## new
+const findUnacceptedUser= async () => {
+  try{
+    const result= await User.find({is_accepte:false},{_id:true,Nom:true});
+    return result;
+  }catch(err){
+    console.log(err);
+  }
+}
+
 const getUserByEmail = async (emailU) => {
   try {
     const user = await User.findOne({ email: emailU });
@@ -193,7 +203,6 @@ let deleteUser = async (uId) => {
   });
   await User.deleteOne({ _id: uId });
 };
-
 module.exports = {
   createUser,
   getUserByEmail,
@@ -214,4 +223,5 @@ module.exports = {
   updatePatient,
   deleteUser,
   roleEnum,
+  findUnacceptedUser
 };

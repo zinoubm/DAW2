@@ -8,7 +8,10 @@ const UtilisateurSchema = new Schema({
   dt_Naiss: Date,
   email: String,
   password: String,
-  is_accepte: Boolean,
+  is_accepte: {
+    type:Boolean,
+    default:false
+  },
   role: String,
   role_info: Object, //admin ou medcin ou patient
 });
