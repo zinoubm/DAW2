@@ -12,6 +12,12 @@ const registerAdmin = async (req, res) => {
   const { Nom, Prenom, Gener, dt_Naiss, email, password, Autorisation } =
     req.body;
 
+  const user = await getUserByEmail(email);
+
+  if (user) {
+    return res.status(500).json({ message: "Email already existing" });
+  }
+
   const adminId = await createAdmin(
     {
       Nom: Nom,
@@ -45,6 +51,12 @@ const registerDoctor = async (req, res) => {
     Sess_thrp_plnf,
     med_atrbs,
   } = req.body;
+
+  const user = await getUserByEmail(email);
+
+  if (user) {
+    return res.status(500).json({ message: "Email already existing" });
+  }
 
   const doctorId = await createDoctor(
     {
@@ -85,6 +97,12 @@ const registerPatient = async (req, res) => {
     score_dépr,
     autres_attrpat,
   } = req.body;
+
+  const user = await getUserByEmail(email);
+
+  if (user) {
+    return res.status(500).json({ message: "Email already existing" });
+  }
 
   const patientId = await createPatient(
     {
