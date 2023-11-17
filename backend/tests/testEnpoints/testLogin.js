@@ -13,11 +13,11 @@ const requestData = {
 axios
   .post(`${apiUrl}/login`, requestData)
   .then((response) => {
-    console.log("Registration successful:", response.data);
+    console.log("Login successful:", response.data);
   })
   .catch((error) => {
     console.error(
-      "Registration failed:",
+      "Login failed:",
       error.response ? error.response.data : error.message
     );
   });

@@ -74,21 +74,24 @@ const createPatient = async (userBaseInfo, patientInfo) => {
 };
 
 // ########################## new
-const findUnacceptedUser= async () => {
-  try{
-    const result= await User.find({is_accepte:false},{_id:true,Nom:true});
+const findUnacceptedUser = async () => {
+  try {
+    const result = await User.find(
+      { is_accepte: false },
+      { _id: true, Nom: true }
+    );
     return result;
-  }catch(err){
+  } catch (err) {
     console.log(err);
   }
-}
+};
 
 const getUserByEmail = async (emailU) => {
   try {
     const user = await User.findOne({ email: emailU });
 
     if (user) {
-      return user._id;
+      return user;
     } else {
       console.log(`User with email ${emailU} not found`);
       return null; // or whatever value you want to return in case of no user
@@ -223,5 +226,5 @@ module.exports = {
   updatePatient,
   deleteUser,
   roleEnum,
-  findUnacceptedUser
+  findUnacceptedUser,
 };

@@ -34,56 +34,56 @@ axios
     );
   });
 
-// // register Doctor
-// const doctorRequestData = {
-//   username: "user",
-//   password: "password",
-// };
+// register Doctor
+const doctorRequestData = {
+  username: "user",
+  password: "password",
+};
 
-// axios
-//   .post(
-//     `${apiUrl}/register/admin`,
-//     requestData,
+axios
+  .post(
+    `${apiUrl}/register/admin`,
+    requestData,
 
-//     {
-//       headers: {
-//         Authorization: `Bearer ${token}`, // Add the Authorization header with the token
-//       },
-//     }
-//   )
-//   .then((response) => {
-//     console.log("Registration successful:", response.data);
-//   })
-//   .catch((error) => {
-//     console.error(
-//       "Registration failed:",
-//       error.response ? error.response.data : error.message
-//     );
-//   });
+    {
+      headers: {
+        Authorization: `Bearer ${token}`, // Add the Authorization header with the token
+      },
+    }
+  )
+  .then((response) => {
+    console.log("Registration successful:", response.data);
+  })
+  .catch((error) => {
+    console.error(
+      "Registration failed:",
+      error.response ? error.response.data : error.message
+    );
+  });
 
-// // register Patient
-// const patientRequestData = {
-//   username: "user",
-//   password: "password",
-// };
+// register Patient
+const patientRequestData = {
+  username: "user",
+  password: "password",
+};
 
-// axios
-//   .post(
-//     `${apiUrl}/register/admin`,
-//     requestData,
+axios
+  .post(
+    `${apiUrl}/register/admin`,
+    requestData,
 
-//     {
-//       headers: {
-//         Authorization: `Bearer ${token}`, // Add the Authorization header with the token
-//       },
-//     }
-//   )
-//   .then((response) => {
-//     console.log("Registration successful:", response.data);
-//   })
-//   .catch((error) => {
-//     console.error(
-//       "Registration failed:",
-//       error.response ? error.response.data : error.message
-//     );
-//   });
+    {
+      headers: {
+        Authorization: `Bearer ${token}`, // Add the Authorization header with the token
+      },
+    }
+  )
+  .then((response) => {
+    console.log("Registration successful:", response.data);
+  })
+  .catch((error) => {
+    console.error(
+      "Registration failed:",
+      error.response ? error.response.data : error.message
+    );
+  });

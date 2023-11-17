@@ -5,13 +5,12 @@ const currentUser = async (req, res, next) => {
   try {
     const authToken = req.header("Authorization");
 
-    userId = await getUserFromSession(authToken);
+    const user = await getUserFromSession(authToken);
 
-    userInfo = await getUser(userId.toString());
+    console.log(user);
 
     req.currentUser = {
-      userId: userId,
-      userInfo: userInfo,
+      userInfo: user,
     };
 
     next();
