@@ -1,12 +1,13 @@
 const {
-  createUser,
   createAdmin,
   createDoctor,
   createPatient,
   getUserByEmail,
+  deleteUser: crudDeleteUser,
 } = require("../crud/crudUser");
 
-const { createSession } = require("../crud/crudSession");
+const { createSession, deldeleteSession } = require("../crud/crudSession");
+const { deleteSession } = require("../crud/crudSession");
 
 const registerAdmin = async (req, res) => {
   const { Nom, Prenom, Gener, dt_Naiss, email, password, Autorisation } =
@@ -147,12 +148,34 @@ const login = async (req, res) => {
   res.status(200).json({ user: user, session: session });
 };
 
-const logout = async (req, res) => {};
+const deleteUser = async (req, res) => {
+  const { userInfo, sessionId } = req.currentUser;
+  const { deleteUserId } = req.body;
+
+  if (userInfo.role !== "ADMIN") {
+    console.log("User:", userInfo._id, "Is an Admin");
+    return res.status(500).json({
+      error: "You're Not Authorized to access this recource. ADMIN ONLY",
+    });
+  }
+
+  await crudDeleteUser(deleteUserId);
+
+  res.status(200).json({ message: "Success" });
+};
+
+const logout = async (req, res) => {
+  const { currentUser, sessionId } = req.currentUser;
+  const session = await deleteSession(sessionId);
+
+  res.status(200).json(session);
+};
 
 module.exports = {
   registerAdmin,
   registerDoctor,
   registerPatient,
+  deleteUser,
   login,
   logout,
 };

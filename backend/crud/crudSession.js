@@ -16,10 +16,9 @@ const createSession = async (userId) => {
 const getUserFromSession = async (sessionId) => {
   try {
     const session = await Session.findOne({ _id: sessionId });
-
     if (session) {
       const user = await User.findOne({ _id: session.userId });
-      return user._id.toString();
+      return user;
     }
 
     return null;
@@ -31,8 +30,8 @@ const getUserFromSession = async (sessionId) => {
 
 const deleteSession = async (sessionId) => {
   try {
-    const session = await Session.deleteOne({ _id: sessionId });
-    return session;
+    const sessionDeleteResponse = await Session.deleteOne({ _id: sessionId });
+    return sessionDeleteResponse;
   } catch (error) {
     console.error("Error deleting session:", error);
     return null;
