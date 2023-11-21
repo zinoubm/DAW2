@@ -4,14 +4,10 @@ const { getUser } = require("../crud/crudUser");
 const currentUser = async (req, res, next) => {
   try {
     const authToken = req.header("Authorization");
-
-    userId = await getUserFromSession(authToken);
-
-    userInfo = await getUser(userId.toString());
-
+    const user = await getUserFromSession(authToken);
     req.currentUser = {
-      userId: userId,
-      userInfo: userInfo,
+      userInfo: user,
+      sessionId: authToken,
     };
 
     next();
