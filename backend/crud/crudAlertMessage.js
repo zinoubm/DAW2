@@ -1,4 +1,5 @@
 const alert=require("../models/Alerts");
+const user=require("../crud/crudUser");
 const stat_user=require("../models/Stat_user");
 const message=require("../models/Message");
 const {format}=require("date-fns");
@@ -7,9 +8,12 @@ const {format}=require("date-fns");
 const createAlert=async(userId,alertInfo)=>{
     try{
         alertInfo.id_Utilisateur=userId;
-        const create = new alert(alertInfo);
-        create.save();
-        return create._id;
+        user.getUser(userId).then((result)=>{
+            alertInfo.userInfo=result;
+            const create = new alert(alertInfo);
+            create.save();
+        })
+        // return create._id;
     }catch{
         console.log("there an error ,check your user id ");
     }
@@ -51,11 +55,21 @@ const deleteMessage= async (idMsg)=>{
 const deleteStat_user= async (idStat)=>{
     await stat_user.deleteOne({ _id: idStat});
 }
+const getMessages=async ()=>{
+    const result =await message.find().sort({date_envoi:1});
+    return result;
+}
+const getAlerts=async ()=>{
+    const result= await alert.find();
+    return result;
+}
 module.exports={
     createAlert,
     createStat_user,
     createMessage,
     deleteAlert,
     deleteMessage,
-    deleteStat_user
+    deleteStat_user,
+    getAlerts,
+    getMessages
 }

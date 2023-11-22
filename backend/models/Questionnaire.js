@@ -1,10 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const QuestionnaireSchema = new Schema({
-  id_Patient: {
-    type: mongoose.SchemaTypes.ObjectId,
-    ref: "Utilisateur",
-  },
+  id_Patient:String,
   datedquest: {
     type: Date,
     default: Date.now(),
