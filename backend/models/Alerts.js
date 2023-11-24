@@ -12,5 +12,6 @@ const AlertsSchema = new Schema({
     type: Date,
     default: Date.now(), // Sets the default value to the current date and time
   },
+  userInfo:Object
 });
 module.exports = mongoose.model("Alerts", AlertsSchema);

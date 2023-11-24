@@ -4,24 +4,28 @@ const Rpnsquest=require("../models/Rpnsquest");
 
 // ################################# CREATE ##############################
 const createQst=async(qstInfo)=>{
-    let create = new question(qstInfo);
-    create.save();
+    const create = new question(qstInfo);
+    await create.save();
     return create._id;
 }
 
 const createRepenseQst=async(RqstInfo)=>{
-    let create = new Rpnsquest(RqstInfo);
-    create.save();
+    const create = new Rpnsquest(RqstInfo);
+    await create.save();
     return create._id;
 }
 
 const createQuestionnaire=async (idPatient,qst)=>{
-    qst.id_Patient=idPatient;
     let create = new Questionnaire(qst);
-    create.save();
+    await create.save();
+    await updateQuestionnaire(create._id,{id_Patient:idPatient})
     return create._id;
 }
 // ################################### GET
+const getAllQst=async ()=>{
+    const result= await question.find();
+    return result;
+}
 const getQst=async (idQst)=>{
     try{
     const qst= await question.findOne({_id:idQst});
@@ -34,6 +38,10 @@ const getQst=async (idQst)=>{
     }
 }
 
+const getAllQuestionnaire=async ()=>{
+    const result= await Questionnaire.find();
+    return result;
+}
 const getQuestionnaire= async (idQuestionnaire)=>{
     try{
         const qst= await Questionnaire.findOne({_id:idQuestionnaire});
@@ -46,6 +54,10 @@ const getQuestionnaire= async (idQuestionnaire)=>{
         }
 }
 
+const getAllReponseQst=async ()=>{
+    const result= await Rpnsquest.find();
+    return result;
+}
 const getReponseQst=async (idRepQst)=>{
     try{
         const Rpsqst= await Rpnsquest.findOne({_id:idRepQst});
@@ -88,6 +100,9 @@ module.exports={
     createRepenseQst,
     createQuestionnaire,
     getQst,
+    getAllQst,
+    getAllQuestionnaire,
+    getAllReponseQst,
     getReponseQst,
     getQuestionnaire,
     updateQst,
