@@ -15,7 +15,7 @@ const createReponseQstController = async (req, res) => {
 //    create questionner
 // you must put the id of patient in url
 const createQuestionnaireController = async (req, res) => {
-  const idPatient = req.params.idPatient;
+  const { idPatient } = req.body;
   console.log(idPatient);
   const idQ = await qstFunc.createQuestionnaire(idPatient, req.body);
   res.json({ success: true, idQuest: idQ });

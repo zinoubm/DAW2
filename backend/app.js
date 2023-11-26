@@ -3,7 +3,10 @@ const bodyParser = require("body-parser");
 
 const mongoose = require("mongoose");
 const authRouter = require("./routes/authRoutes");
-const appRouter = require("./routes/appRoutes");
+const acceptRouter = require("./routes/acceptRoutes");
+const messageRouter = require("./routes/messageRouter");
+const allertRouter = require("./routes/alertRoutes");
+const questionRouter = require("./routes/questionRoutes");
 
 const { currentUser } = require("./middlewares/authMiddleware");
 
@@ -28,7 +31,14 @@ mongoose
 
 app.use(currentUser);
 
-app.use("/api", authRouter, appRouter);
+app.use(
+  "/api",
+  authRouter,
+  acceptRouter,
+  messageRouter,
+  allertRouter,
+  questionRouter
+);
 
 app.get("/", (req, res) => {
   res.send("ImIAddicted Is running!");

@@ -1,10 +1,8 @@
 const msgFunc = require("../crud/crudAlertMessage");
 // put message
 const createMsgController = async (req, res) => {
-  // lazem sender w reciver ykoun ObjectId machi
-  // string ro7 ll schema te3 message drk tafhm
-  const sender = req.params.senderId;
-  const reciver = req.params.reciverId;
+  const { sender, reciver } = req.body;
+
   msgFunc.createMessage(sender, reciver);
   res.json({ success: true });
 };
