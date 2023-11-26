@@ -67,7 +67,7 @@ const registerDoctor = async (req, res) => {
       dt_Naiss: new Date(dt_Naiss),
       email: email,
       password: password,
-      is_accepte: true,
+      is_accepte: false,
     },
     {
       Specilite: Specilite,

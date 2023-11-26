@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 
 const mongoose = require("mongoose");
 const authRouter = require("./routes/authRoutes");
+const appRouter = require("./routes/appRoutes");
+
 const { currentUser } = require("./middlewares/authMiddleware");
 
 require("dotenv").config({ path: ".env" });
@@ -26,7 +28,7 @@ mongoose
 
 app.use(currentUser);
 
-app.use("/api", authRouter);
+app.use("/api", authRouter, appRouter);
 
 app.get("/", (req, res) => {
   res.send("ImIAddicted Is running!");
